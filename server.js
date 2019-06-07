@@ -16,6 +16,7 @@ app.get('/ajax/test.json', (req, res) => {
     const stats = {
         reqsPerMin: analyzer.reqsPerMinStats(),
         distHttpMethods: analyzer.distHttpMethodStats(),
+        distHttpCodeStats: analyzer.distHttpCodeStats(),
     };
     res.send(JSON.stringify(stats));
 });

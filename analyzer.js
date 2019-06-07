@@ -73,6 +73,83 @@ exports.distHttpMethodStats = () => {
     return sumObj;
 };
 
+exports.distHttpCodeStats = () => {
+    const sumObj = {};
+    const codes = [
+        '100',
+        '101',
+        '200',
+        '201',
+        '202',
+        '203',
+        '204',
+        '205',
+        '206',
+        '300',
+        '301',
+        '302',
+        '303',
+        '304',
+        '305',
+        '306',
+        '307',
+        '308',
+        '400',
+        '401',
+        '402',
+        '403',
+        '404',
+        '405',
+        '406',
+        '407',
+        '408',
+        '409',
+        '410',
+        '411',
+        '412',
+        '413',
+        '414',
+        '415',
+        '416',
+        '417',
+        '421',
+        '426',
+        '428',
+        '429',
+        '431',
+        '451',
+        '500',
+        '501',
+        '502',
+        '503',
+        '504',
+        '505',
+        '506',
+        '507',
+        '511',
+    ];
+    codes.forEach(code => {
+        sumObj[code] = 0;
+    });
+
+    const content = fs.readFileSync('resources/requests.json', 'utf8');
+
+    try {
+        const requests = JSON.parse(content); // this is how you parse a string into JSON
+        requests.forEach(request => {
+            if (!codes.includes(request.response_code)) {
+                console.log(request);
+            }
+            const key = request.response_code;
+            sumObj[key]++;
+        });
+    } catch (ex) {
+        console.error(ex);
+    }
+    console.log(sumObj);
+    return sumObj;
+};
+
 exports.reqsPerMinStats = () => {
     const content = fs.readFileSync('resources/requests.json', 'utf8');
 
