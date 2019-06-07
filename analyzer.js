@@ -150,6 +150,32 @@ exports.distHttpCodeStats = () => {
     return sumObj;
 };
 
+exports.distBodySize = () => {
+    const sumObj = {};
+
+    for (let i = 0; i < 1000; i++) {
+        sumObj[i] = 0;
+    }
+
+    const content = fs.readFileSync('resources/requests.json', 'utf8');
+
+    try {
+        let requests = JSON.parse(content); // this is how you parse a string into JSON
+        requests = requests.filter(req => {
+            return req.response_code === '200' && req.document_size < 1000;
+        });
+
+        console.log(requests);
+        requests.forEach(request => {
+            const key = request.document_size;
+            sumObj[key]++;
+        });
+    } catch (ex) {
+        console.error(ex);
+    }
+    return sumObj;
+};
+
 exports.reqsPerMinStats = () => {
     const content = fs.readFileSync('resources/requests.json', 'utf8');
 

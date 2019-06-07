@@ -7,32 +7,9 @@ jQuery(document).ready(function() {
     genMethodChart(data.distHttpMethods);
     genReqsPerMinChart(data.reqsPerMin);
     genCodeChart(data.distHttpCodeStats);
+    genSizeChart(data.distBodySize);
   });
 });
-
-function genReqsPerMinChart(data){
-  const labels = Object.keys(data);
-  const items = Object.values(data);
-  const ctx = document.getElementById('requestsPerMinuteChart').getContext('2d');
-  const chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: labels,
-        datasets: [{
-            label: 'Requests per minute',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: items
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-  });
-}
 
 function genMethodChart(data){
   const labels = Object.keys(data);
@@ -68,7 +45,31 @@ function genMethodChart(data){
   });
 }
 
-function genCodeChart(data){
+function genReqsPerMinChart(data){
+  const labels = Object.keys(data);
+  const items = Object.values(data);
+  const ctx = document.getElementById('requestsPerMinuteChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Requests per minute',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: items
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+  });
+}
+
+function genCodeChart(data) {
   const labels = Object.keys(data);
   const items = Object.values(data);
   const ctx = document.getElementById('responseCodeChart').getContext('2d');
@@ -93,6 +94,30 @@ function genCodeChart(data){
               'rgb(128, 99, 132)',
               'rgb(0, 0, 0)'
             ],
+            borderColor: 'rgb(255, 99, 132)',
+            data: items
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+  });
+}
+
+function genSizeChart(data) {
+  const labels = Object.keys(data);
+  const items = Object.values(data);
+  const ctx = document.getElementById('documentSizeChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Distribution of Body-Size',
+            backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: items
         }]

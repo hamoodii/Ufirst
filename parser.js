@@ -38,7 +38,7 @@ const main = () => {
             obj.request.protocol_version = protocolParts[1];
 
             obj.response_code = lineParts[5];
-            obj.documnet_size = lineParts[6];
+            obj.document_size = parseInt(lineParts[6]);
             if (lineParts.length === 7) {
                 objArr.push(obj);
             } else {
