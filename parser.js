@@ -2,27 +2,33 @@
 const fs = require('fs');
 
 exports.getTimeParts = timeString => {
-    return timeString.replace('[', '').replace(']', '').split(':');
+    return timeString
+        .replace('[', '')
+        .replace(']', '')
+        .split(':');
 };
-
 
 const main = () => {
     fs.readFile('resources/epa-http.txt', 'utf8', (err, contents) => {
-        const lines = contents.replace(/"/g, '').split('\n').filter(line => line.trim().length);
-        console.log(lines);
+        const lines = contents
+            .replace(/"/g, '')
+            .split('\n')
+            .filter(line => line.trim().length);
         const objArr = [];
+        const errArr = [];
+        let id = 0;
         lines.forEach(line => {
             const lineParts = line.split(' ');
-            const obj = { };
-            obj.host = lineParts[[0]];
+            const obj = {};
+            obj.id = ++id;
+            obj.host = lineParts[0];
 
             const timeParts = this.getTimeParts(lineParts[1]);
             obj.datetime = {};
             obj.datetime.day = timeParts[0];
             obj.datetime.hour = timeParts[1];
-            obj.datetime.minute= timeParts[2];
+            obj.datetime.minute = timeParts[2];
             obj.datetime.second = timeParts[3];
-            obj.rest = lineParts[2];
 
             obj.request = {};
             obj.request.method = lineParts[2];
@@ -33,15 +39,30 @@ const main = () => {
 
             obj.response_code = lineParts[5];
             obj.documnet_size = lineParts[6];
-            objArr.push(obj);
+            if (lineParts.length === 7) {
+                objArr.push(obj);
+            } else {
+                errArr.push(obj);
+            }
         });
-        fs.writeFile("resources/output.json", JSON.stringify(objArr), function(err) {
-            if(err) {
+        fs.writeFile(
+            'resources/requests.json',
+            JSON.stringify(objArr),
+            function(err) {
+                if (err) {
+                    return console.log(err);
+                }
+            }
+        );
+        fs.writeFile('resources/errors.json', JSON.stringify(objArr), function(
+            err
+        ) {
+            if (err) {
                 return console.log(err);
             }
         });
     });
-}
+};
 
 if (require.main === module) {
     main();
