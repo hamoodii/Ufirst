@@ -17,6 +17,7 @@ app.get('/ajax/test.json', (req, res) => {
         reqsPerMin: analyzer.reqsPerMinStats(),
         distHttpMethods: analyzer.distHttpMethodStats(),
         distHttpCodeStats: analyzer.distHttpCodeStats(),
+        distBodySize: analyzer.distBodySize(),
     };
     res.send(JSON.stringify(stats));
 });
