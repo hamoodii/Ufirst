@@ -4,7 +4,8 @@ const fs = require('fs');
 /*
 *
 */
-const initSumObj = (sumObj => {
+exports.initSumObj = () => {
+  const sumObj = {};
   for (let hour = 0; hour < 24; hour++ ) {
     for (let minute = 0; minute < 60; minute++) {
       const key = hour.toString().padStart(2, '0') 
@@ -14,7 +15,7 @@ const initSumObj = (sumObj => {
     }
   }
   return sumObj;
-});
+};
 
 exports.test = () => {
   
@@ -55,4 +56,8 @@ exports.reqsPerMinStats = () => {
   } catch (ex) {
     console.error(ex);
   }
+}
+
+if (require.main === module) {
+  main();
 }
