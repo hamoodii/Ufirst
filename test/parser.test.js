@@ -5,7 +5,7 @@ const parser = require('../parser');
 describe('parser', function() {
     describe('getTimeParts()', function() {
         const result = parser.getTimeParts('[29:23:53:25]');
-        it("should return type []", function() {
+        it('should return type []', function() {
             assert.isArray(result, 'we expected []-type here!');
         });
 
@@ -15,7 +15,7 @@ describe('parser', function() {
 
         it('should keep order', function() {
             const expected = ['29', '23', '53', '25'];
-            assert.deepEqual(result, expected)
+            assert.deepEqual(result, expected);
         });
     });
 });
