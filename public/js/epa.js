@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+$(document).ready(function() {
     console.log('document.ready');
   // TODO: implementation
   $.getJSON( "ajax/test.json", function( data ) {
