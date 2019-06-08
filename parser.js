@@ -8,6 +8,40 @@ exports.getTimeParts = timeString => {
         .split(':');
 };
 
+exports.createTimeObj = timeParts => {
+    return {
+        day: timeParts[0],
+        hour: timeParts[1],
+        minute: timeParts[2],
+        second: timeParts[3],
+    };
+};
+
+exports.readFile = path => {
+    const requestLines = fs
+        .readFileSync(path, 'utf8')
+        .trim()
+        .replace(/"/g, '')
+        .split('\n');
+    return requestLines;
+};
+
+exports.splitLine = line => {
+    return line.split(' ');
+};
+
+exports.createReqObj = lineParts => {
+    const reqObj = {};
+    reqObj.id = 0;
+    reqObj.host = lineParts[0];
+    reqObj.datetime = this.createTimeObj(this.getTimeParts(lineParts[1]));
+    reqObj.request = lineParts[2];
+    reqObj.response_code = lineParts[3];
+    reqObj.document_size = lineParts[4];
+    reqObj.valid = true;
+    return reqObj;
+};
+
 const main = () => {
     fs.readFile('resources/epa-http.txt', 'utf8', (err, contents) => {
         const lines = contents
