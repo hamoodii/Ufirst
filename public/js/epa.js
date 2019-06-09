@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    console.log('document.ready');
-  // TODO: implementation
   $.getJSON( "ajax/test.json", function( data ) {
     console.log(data);
 
@@ -11,7 +9,7 @@ $(document).ready(function() {
   });
 });
 
-function genMethodChart(data){
+function genMethodChart(data) {
   const labels = Object.keys(data);
   const items = Object.values(data);
   const ctx = document.getElementById('methodChart').getContext('2d');
@@ -65,13 +63,33 @@ function genReqsPerMinChart(data){
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Anzahl'
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Stunde'
+          }
+        }],
+      }
+    }
   });
 }
 
 function genCodeChart(data) {
-  const labels = Object.keys(data);
-  const items = Object.values(data);
+  const labels = [];
+  const values = [];
+  console.log(typeof(data));
+  data.forEach(elem => {
+    labels.push(elem[0]);
+    values.push(elem[1]);
+  });
   const ctx = document.getElementById('responseCodeChart').getContext('2d');
   const chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -95,7 +113,7 @@ function genCodeChart(data) {
               'rgb(0, 0, 0)'
             ],
             borderColor: 'rgb(255, 99, 132)',
-            data: items
+            data: values
         }]
     },
 
@@ -124,6 +142,21 @@ function genSizeChart(data) {
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Anzahl'
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Grösse in Bytes'
+          }
+        }],
+      }
+    }
   });
 }

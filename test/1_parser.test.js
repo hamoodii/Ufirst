@@ -20,7 +20,6 @@ describe('parser', function() {
         const result = parser.splitLine(line);
 
         it('should be []', function() {
-            console.log(result);
             assert.isArray(result, 'we expected []-type here!');
         });
     });
@@ -79,7 +78,6 @@ describe('parser', function() {
             '1497',
         ];
         const result = parser.createReqObj(lineParts, 1);
-        console.log(result);
         it('should be {}', function() {
             assert.isObject(result, 'we expected {}-type here!');
         });

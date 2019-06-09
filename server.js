@@ -12,8 +12,7 @@ const app = express()
     .get('/', (req, res) => res.render('pages/index'));
 
 app.get('/ajax/test.json', (req, res) => {
-    console.log(analyzer.reqsPerMinStats());
-    const stats = {
+        const stats = {
         reqsPerMin: analyzer.reqsPerMinStats(),
         distHttpMethods: analyzer.distHttpMethodStats(),
         distHttpCodeStats: analyzer.distHttpCodeStats(),

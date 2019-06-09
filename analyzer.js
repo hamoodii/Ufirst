@@ -30,7 +30,6 @@ exports.distHttpMethodStats = () => {
 
     try {
         const requests = JSON.parse(content).filter(req => req.valid); // this is how you parse a string into JSON
-        console.log(requests.length);
 
         requests.forEach(request => {
             if (!methods.includes(request.request.method)) {
@@ -67,7 +66,19 @@ exports.distHttpCodeStats = () => {
     } catch (ex) {
         console.error(ex);
     }
-    return sumObj;
+
+    
+var sortable = [];
+for (let obj in sumObj) {
+    sortable.push([obj, sumObj[obj]]);
+}
+
+sortable.sort(function(a, b) {
+    return b[1] - a[1];
+});
+
+   // return sumObj.sort(function(a, b){return b-a});
+   return sortable;
 };
 
 exports.distBodySize = () => {
@@ -114,7 +125,6 @@ exports.reqsPerMinStats = () => {
 
 const main = () => {
     const res = this.distHttpMethodStats();
-    console.log(res);
 };
 
 if (require.main === module) {

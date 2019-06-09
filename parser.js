@@ -40,9 +40,6 @@ exports.checkLines = lines => {
         lineParts = this.splitLine(line);
         id++;
         if (lineParts.length !== 8) {
-            console.log(
-                '7 141.243.1.172 [29:23:53:25] "GET /Software.html HTTP/1.0" 200 1497'
-            );
             console.log(id + ' ' + lineParts.length + ' ' + line);
             errors++;
         }
@@ -113,7 +110,6 @@ exports.createReqParts = (lp2, lp3, lp4, lp5) => {
 };
 
 exports.createReqObj = (lineParts, id) => {
-    //console.log(lineParts);
     const reqObj = {};
     reqObj.id = id;
     reqObj.host = lineParts[0];
@@ -127,7 +123,6 @@ exports.createReqObj = (lineParts, id) => {
     reqObj.response_code = lineParts[6];
     reqObj.document_size = lineParts[7];
     reqObj.valid = false;
-    //console.log(reqObj);
     return reqObj;
 };
 

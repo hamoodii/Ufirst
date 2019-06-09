@@ -19,7 +19,6 @@ describe('analyzer', function() {
         });
 
         it('should be size 9', function() {
-            console.log(Object.keys(result));
             assert.lengthOf(Object.keys(result), 9, 'we expected size 9');
         });
     });
