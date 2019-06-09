@@ -52,6 +52,22 @@ describe('parser', function() {
         });
     });
 
+    describe('createReqParts()', function() {
+        const result = parser.createReqParts(
+            'GET',
+            '/Software.html',
+            'HTTP/1.0'
+        );
+
+        it('should be {}-type', function() {
+            assert.isObject(result, 'we expected {} here!');
+        });
+
+        it('should have the size 4', function() {
+            assert.lengthOf(Object.keys(result), 4, 'we expected size 4');
+        });
+    });
+
     describe('createReqObj()', function() {
         const lineParts = [
             '141.243.1.172',
@@ -62,7 +78,8 @@ describe('parser', function() {
             '200',
             '1497',
         ];
-        const result = parser.createReqObj(lineParts);
+        const result = parser.createReqObj(lineParts, 1);
+        console.log(result);
         it('should be {}', function() {
             assert.isObject(result, 'we expected {}-type here!');
         });
@@ -93,6 +110,13 @@ describe('parser', function() {
             assert.isString(result.host, 'we expected string here!');
             assert.isNotEmpty(result.host, 'we expected value here!');
             assert.isObject(result.datetime, 'we expected {} here!');
+        });
+    });
+
+    describe('createReqsArr()', function() {
+        const result = parser.createReqsArr();
+        it('should be []', function() {
+            assert.isArray(result, 'we expected [] here!');
         });
     });
 });
