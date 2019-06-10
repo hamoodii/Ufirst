@@ -16,7 +16,9 @@ describe('integrity test', function() {
 
         it('should have 46,014 GET requests', function() {
             assert.lengthOf(
-                reqObjs.filter(reqObj => reqObj.request.method === 'GET'),
+                reqObjs.filter(
+                    reqObj => reqObj.valid && reqObj.request.method === 'GET'
+                ),
                 46014,
                 'we expected 46,014 get-requests here!'
             );
@@ -24,7 +26,9 @@ describe('integrity test', function() {
 
         it('should have 1,622 POST requests', function() {
             assert.lengthOf(
-                reqObjs.filter(reqObj => reqObj.request.method === 'POST'),
+                reqObjs.filter(
+                    reqObj => reqObj.valid && reqObj.request.method === 'POST'
+                ),
                 1622,
                 'we expected 1,622 post-requests here!'
             );
@@ -32,7 +36,9 @@ describe('integrity test', function() {
 
         it('should have 106 HEAD requests', function() {
             assert.lengthOf(
-                reqObjs.filter(reqObj => reqObj.request.method === 'HEAD'),
+                reqObjs.filter(
+                    reqObj => reqObj.valid && reqObj.request.method === 'HEAD'
+                ),
                 106,
                 'we expected 106 head-requests here!'
             );

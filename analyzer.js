@@ -40,7 +40,7 @@ exports.distHttpMethodStats = requests => {
 exports.distHttpCodeStats = requests => {
     const sumObj = {};
     const codes = constants.STATUS_CODES;
-    codes.map(code => sumObj[code] = 0 );
+    codes.map(code => (sumObj[code] = 0));
 
     requests.map(request => {
         const key = request.response_code;
@@ -104,7 +104,7 @@ exports.getRequestsJSON = path => {
 
 exports.getStats = () => {
     let stats = {};
-    const requests = this.getRequestsJSON() // this is how you parse a string into JSON
+    const requests = this.getRequestsJSON(); // this is how you parse a string into JSON
     stats = {
         reqsPerMin: this.reqsPerMinStats(requests),
         distHttpMethods: this.distHttpMethodStats(requests),

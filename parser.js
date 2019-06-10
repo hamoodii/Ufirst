@@ -126,6 +126,17 @@ exports.createReqObj = (lineParts, id) => {
     return reqObj;
 };
 
+exports.validateReqObj = reqObj => {
+    try {
+        decodeURIComponent(reqObj.request.url);
+        reqObj.valid = true;
+    } catch (err) {
+        console.log(reqObj.request.url);
+        console.log(err);
+    }
+    return reqObj;
+};
+
 exports.createReqsArr = () => {
     const reqLines = this.cleanLines(this.readFile('resources/epa-http.txt'));
     this.checkLines(reqLines);
@@ -135,7 +146,7 @@ exports.createReqsArr = () => {
         const lineParts = this.splitLine(reqLine);
         const reqObj = this.createReqObj(lineParts, ++id);
         if (lineParts.length === 8) {
-            reqObj.valid = true;
+            this.validateReqObj(reqObj);
         }
         objArr.push(reqObj);
     });
