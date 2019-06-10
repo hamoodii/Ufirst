@@ -30,11 +30,11 @@ describe('integrity test', function() {
             );
         });
 
-        it('should have 107 HEAD requests', function() {
+        it('should have 106 HEAD requests', function() {
             assert.lengthOf(
                 reqObjs.filter(reqObj => reqObj.request.method === 'HEAD'),
-                107,
-                'we expected 107 head-requests here!'
+                106,
+                'we expected 106 head-requests here!'
             );
         });
 

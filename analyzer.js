@@ -40,11 +40,9 @@ exports.distHttpMethodStats = requests => {
 exports.distHttpCodeStats = requests => {
     const sumObj = {};
     const codes = constants.STATUS_CODES;
-    codes.forEach(code => {
-        sumObj[code] = 0;
-    });
+    codes.map(code => sumObj[code] = 0 );
 
-    requests.forEach(request => {
+    requests.map(request => {
         const key = request.response_code;
 
         if (!codes.includes(key)) {
