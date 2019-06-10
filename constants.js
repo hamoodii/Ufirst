@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ *
+ */
 exports.STATUS_CODES = [
     '100',
     '101',
@@ -52,6 +57,11 @@ exports.STATUS_CODES = [
     '511',
 ];
 
+/**
+ *
+ *
+ *
+ */
 exports.HTTP_METHODS = [
     'GET',
     'HEAD',
