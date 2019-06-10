@@ -2,8 +2,10 @@ const fs = require('fs');
 
 const constants = require('./constants');
 
-/*
+/**
+ * instalization an object
  *
+ * @return {dict}
  */
 exports.initSumObj = () => {
     const sumObj = {};
@@ -19,6 +21,13 @@ exports.initSumObj = () => {
     return sumObj;
 };
 
+/**
+ * create an objects with keys
+ *
+ * @param {dict[]} requests
+ *
+ * @return {dict} sumObj
+ */
 exports.distHttpMethodStats = requests => {
     const sumObj = {};
     const methods = constants.HTTP_METHODS;
@@ -37,6 +46,13 @@ exports.distHttpMethodStats = requests => {
     return sumObj;
 };
 
+/**
+ * count which respons code was sent how many times.
+ *
+ * @params {dict[]} requests
+ *
+ * @return {array[]} sortable
+ */
 exports.distHttpCodeStats = requests => {
     const sumObj = {};
     const codes = constants.STATUS_CODES;
@@ -56,7 +72,7 @@ exports.distHttpCodeStats = requests => {
         sortable.push([obj, sumObj[obj]]);
     }
 
-    sortable.sort(function(a, b) {
+    sortable.sort((a, b) => {
         return b[1] - a[1];
     });
 
@@ -64,6 +80,11 @@ exports.distHttpCodeStats = requests => {
     return sortable;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.distBodySize = requests => {
     const sumObj = {};
 
@@ -82,6 +103,11 @@ exports.distBodySize = requests => {
     return sumObj;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.reqsPerMinStats = requests => {
     const sumObj = this.initSumObj();
     requests.forEach(req => {
@@ -91,6 +117,11 @@ exports.reqsPerMinStats = requests => {
     return sumObj;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.getRequestsJSON = path => {
     const content = fs.readFileSync('resources/requests.json', 'utf8');
     let requests = [];
@@ -102,6 +133,11 @@ exports.getRequestsJSON = path => {
     return requests;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.getStats = () => {
     let stats = {};
     const requests = this.getRequestsJSON(); // this is how you parse a string into JSON

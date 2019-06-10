@@ -3,6 +3,11 @@ const fs = require('fs');
 
 const constants = require('./constants');
 
+/**
+ *
+ *
+ *
+ */
 exports.getTimeParts = timeString => {
     return timeString
         .replace('[', '')
@@ -10,6 +15,11 @@ exports.getTimeParts = timeString => {
         .split(':');
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.createTimeObj = timeParts => {
     return {
         day: timeParts[0],
@@ -19,6 +29,11 @@ exports.createTimeObj = timeParts => {
     };
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.readFile = path => {
     const requestLines = fs
         .readFileSync(path, 'utf8')
@@ -27,12 +42,22 @@ exports.readFile = path => {
     return requestLines;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.cleanLines = lines => {
     return lines.map(line => {
         return line;
     });
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.checkLines = lines => {
     let id = 0;
     let errors = 0;
@@ -49,6 +74,11 @@ exports.checkLines = lines => {
     console.log('Errors: ' + errors);
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.splitLine = line => {
     const lp = line.split('"');
     const lp1 = lp.shift().trim();
@@ -99,6 +129,11 @@ exports.splitLine = line => {
     ];
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.createReqParts = (lp2, lp3, lp4, lp5) => {
     const reqObj = {};
     reqObj.method = lp2;
@@ -109,6 +144,11 @@ exports.createReqParts = (lp2, lp3, lp4, lp5) => {
     return reqObj;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.createReqObj = (lineParts, id) => {
     const reqObj = {};
     reqObj.id = id;
@@ -126,6 +166,11 @@ exports.createReqObj = (lineParts, id) => {
     return reqObj;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.validateReqObj = reqObj => {
     try {
         decodeURIComponent(reqObj.request.url);
@@ -137,6 +182,11 @@ exports.validateReqObj = reqObj => {
     return reqObj;
 };
 
+/**
+ *
+ *
+ *
+ */
 exports.createReqsArr = () => {
     const reqLines = this.cleanLines(this.readFile('resources/epa-http.txt'));
     this.checkLines(reqLines);
