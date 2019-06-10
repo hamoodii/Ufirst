@@ -12,12 +12,7 @@ const app = express()
     .get('/', (req, res) => res.render('pages/index'));
 
 app.get('/ajax/test.json', (req, res) => {
-        const stats = {
-        reqsPerMin: analyzer.reqsPerMinStats(),
-        distHttpMethods: analyzer.distHttpMethodStats(),
-        distHttpCodeStats: analyzer.distHttpCodeStats(),
-        distBodySize: analyzer.distBodySize(),
-    };
+    const stats = analyzer.getStats();
     res.send(JSON.stringify(stats));
 });
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
