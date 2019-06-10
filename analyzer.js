@@ -93,20 +93,26 @@ exports.reqsPerMinStats = requests => {
     return sumObj;
 };
 
-exports.getStats = () => {
+exports.getRequestsJSON = path => {
     const content = fs.readFileSync('resources/requests.json', 'utf8');
-    let stats = {};
+    let requests = [];
     try {
-        const requests = JSON.parse(content); // this is how you parse a string into JSON
-        stats = {
-            reqsPerMin: this.reqsPerMinStats(requests),
-            distHttpMethods: this.distHttpMethodStats(requests),
-            distHttpCodeStats: this.distHttpCodeStats(requests),
-            distBodySize: this.distBodySize(requests),
-        };
+        requests = JSON.parse(content);
     } catch (ex) {
         console.error(ex);
     }
+    return requests;
+};
+
+exports.getStats = () => {
+    let stats = {};
+    const requests = this.getRequestsJSON() // this is how you parse a string into JSON
+    stats = {
+        reqsPerMin: this.reqsPerMinStats(requests),
+        distHttpMethods: this.distHttpMethodStats(requests),
+        distHttpCodeStats: this.distHttpCodeStats(requests),
+        distBodySize: this.distBodySize(requests),
+    };
 
     return stats;
 };

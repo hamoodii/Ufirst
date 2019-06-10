@@ -3,6 +3,7 @@ const assert = require('chai').assert;
 const analyzer = require('../analyzer');
 
 describe('analyzer', function() {
+    const requests = analyzer.getRequestsJSON();
     describe('initSumObj()', function() {
         const result = analyzer.initSumObj();
         it('should return type {}', function() {
@@ -13,7 +14,7 @@ describe('analyzer', function() {
     });
 
     describe('disHttpMethodsStats()', function() {
-        const result = analyzer.distHttpMethodStats();
+        const result = analyzer.distHttpMethodStats(requests);
         it('should return type {}', function() {
             assert.isObject(result, 'we expected {}-type here!');
         });
