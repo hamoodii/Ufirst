@@ -68,13 +68,13 @@ function genReqsPerMinChart(data){
         yAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Anzahl'
+            labelString: 'Amount'
           }
         }],
         xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Stunde'
+            labelString: 'Hour'
           }
         }],
       }
@@ -147,13 +147,13 @@ function genSizeChart(data) {
         yAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Anzahl'
+            labelString: 'Amount'
           }
         }],
         xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Grösse in Bytes'
+            labelString: 'Size in Bytes'
           }
         }],
       }
